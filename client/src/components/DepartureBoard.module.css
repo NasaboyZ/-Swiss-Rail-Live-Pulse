@@ -1,0 +1,221 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  animation: fade-in-up 300ms var(--ease-normal) both;
+}
+
+/* ── Header row ─────────────────────────────────────────────────── */
+.boardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.boardTitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.refreshBadge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  background: rgba(217, 119, 6, 0.1);
+  color: var(--status-orange);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  border-radius: var(--r-pill);
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
+.boardCount {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Table wrapper ──────────────────────────────────────────────── */
+.tableWrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.table thead tr {
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--border);
+}
+
+.table th {
+  padding: var(--s-2) var(--s-4);
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+}
+
+/* ── Rows ───────────────────────────────────────────────────────── */
+.row {
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background-color var(--ease-fast);
+}
+
+.row:last-child { border-bottom: none; }
+.row:hover      { background: var(--bg-card-hover); }
+
+/* Left accent stripe for delayed trains */
+.row_minor_delay {
+  border-left: 3px solid var(--status-orange);
+  background: rgba(217, 119, 6, 0.02);
+}
+.row_major_delay {
+  border-left: 3px solid var(--status-red);
+  background: rgba(220, 38, 38, 0.02);
+}
+
+.table td {
+  padding: var(--s-2) var(--s-4);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+/* ── Column widths ──────────────────────────────────────────────── */
+.colTime     { width: 70px; white-space: nowrap; }
+.colTrain    { width: 90px; }
+.colDest     { min-width: 140px; }
+.colPlatform { width: 60px; text-align: center; }
+.colDelay    { width: 80px; text-align: right; white-space: nowrap; }
+.colStatus   { width: 140px; }
+
+/* ── Column: Time ───────────────────────────────────────────────── */
+.time {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+/* ── Column: Train badge — light mode colors ────────────────────── */
+.trainBadge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: var(--r-sm);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  background: var(--bg-base);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.badge_ic  { background: rgba(37,99,235,.1);   color: #1d4ed8; border: 1px solid rgba(37,99,235,.2); }
+.badge_ir  { background: rgba(124,58,237,.1);  color: #6d28d9; border: 1px solid rgba(124,58,237,.2); }
+.badge_s   { background: rgba(5,150,105,.1);   color: #065f46; border: 1px solid rgba(5,150,105,.2); }
+.badge_re  { background: rgba(217,119,6,.1);   color: #92400e; border: 1px solid rgba(217,119,6,.2); }
+.badge_ec  { background: rgba(219,39,119,.1);  color: #9d174d; border: 1px solid rgba(219,39,119,.2); }
+
+/* ── Column: Destination ────────────────────────────────────────── */
+.colDest { font-weight: 500; color: var(--text-primary); }
+
+/* ── Column: Platform ───────────────────────────────────────────── */
+.platform {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 26px;
+  padding: 0 var(--s-1);
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-weight: 700;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+/* ── Column: Delay ──────────────────────────────────────────────── */
+.delay { font-family: var(--font-mono); font-size: 12px; font-weight: 700; }
+.delay_minor_delay { color: var(--status-orange); }
+.delay_major_delay { color: var(--status-red); }
+.delayNone         { color: var(--text-muted); }
+
+/* ── Status pill ────────────────────────────────────────────────── */
+.pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pill_on_time     { background: rgba(5,150,105,.1);  color: var(--status-green);  border: 1px solid rgba(5,150,105,.2); }
+.pill_minor_delay { background: rgba(217,119,6,.1);  color: var(--status-orange); border: 1px solid rgba(217,119,6,.2); }
+.pill_major_delay { background: rgba(220,38,38,.1);  color: var(--status-red);    border: 1px solid rgba(220,38,38,.2); }
+
+/* ── Skeleton loader ────────────────────────────────────────────── */
+.skeleton {
+  display: block;
+  height: 14px;
+  border-radius: var(--r-sm);
+  background: linear-gradient(
+    90deg,
+    var(--bg-base) 25%,
+    var(--border-subtle) 50%,
+    var(--bg-base) 75%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  width: 80%;
+}
+
+/* ── Empty / Error states ───────────────────────────────────────── */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  padding: var(--s-12);
+  color: var(--text-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.emptyIcon { font-size: 32px; }
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-4);
+  padding: var(--s-5);
+  background: rgba(220, 38, 38, 0.06);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: var(--r-lg);
+  color: var(--status-red);
+  animation: fade-in-up 300ms var(--ease-normal) both;
+}
+
+.errorIcon { font-size: 22px; flex-shrink: 0; }
+.error strong { display: block; margin-bottom: var(--s-1); }
+.error p { font-size: 13px; opacity: .85; }
+.error small { font-size: 12px; opacity: .6; margin-top: var(--s-1); display: block; }

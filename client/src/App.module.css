@@ -1,0 +1,64 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Tab bar ──────────────────────────────────────────────────────── */
+.tabBar {
+  display: flex;
+  gap: 2px;
+  padding: 0 var(--s-6);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-4);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-bottom: 2px solid transparent;
+  transition: color var(--ease-fast), border-color var(--ease-fast);
+  margin-bottom: -1px;
+}
+
+.tab:hover { color: var(--text-primary); }
+
+.tabActive {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Body ──────────────────────────────────────────────────────────── */
+.body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Departures view (scroll allowed) ────────────────────────────── */
+.main {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--s-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+/* ── Routes view (map must fill height, no scroll) ───────────────── */
+.routeArea {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: var(--s-4);
+  flex-direction: column;
+}

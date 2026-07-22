@@ -1,0 +1,240 @@
+.panel {
+  display: flex;
+  gap: var(--s-4);
+  flex: 1;
+  min-height: 0;
+  animation: fade-in-up 300ms var(--ease-normal) both;
+}
+
+/* ── Left sidebar ───────────────────────────────────────────────── */
+.sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.connectionList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.listLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 0 var(--s-1);
+}
+
+/* ── Connection card ────────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  text-align: left;
+  transition: all var(--ease-fast);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  width: 100%;
+}
+
+.card:hover { box-shadow: var(--shadow-md); border-color: var(--accent); }
+
+.cardSelected {
+  border-color: var(--accent);
+  border-left: 3px solid var(--accent);
+  background: rgba(37, 99, 235, 0.02);
+  box-shadow: var(--shadow-md);
+}
+
+/* Card header */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trainBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--r-sm);
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg-base);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.cat_ic  { background: rgba(37,99,235,.1);  color: #1d4ed8; border-color: rgba(37,99,235,.2); }
+.cat_ir  { background: rgba(124,58,237,.1); color: #6d28d9; border-color: rgba(124,58,237,.2); }
+.cat_s   { background: rgba(5,150,105,.1);  color: #065f46; border-color: rgba(5,150,105,.2); }
+.cat_re  { background: rgba(217,119,6,.1);  color: #92400e; border-color: rgba(217,119,6,.2); }
+
+.statusChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status_on_time     { background: rgba(5,150,105,.1);  color: var(--status-green);  border: 1px solid rgba(5,150,105,.2); }
+.status_minor_delay { background: rgba(217,119,6,.1);  color: var(--status-orange); border: 1px solid rgba(217,119,6,.2); }
+.status_major_delay { background: rgba(220,38,38,.1);  color: var(--status-red);    border: 1px solid rgba(220,38,38,.2); }
+
+/* Time display */
+.cardTimes {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.timeBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.time {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.station {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+}
+
+.timeDivider {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.durationLine {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  position: relative;
+}
+
+.durationLine::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -4px;
+  border-left: 5px solid var(--border);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.duration {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Card footer */
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stops, .platform {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.platform {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: var(--r-sm);
+  color: var(--text-secondary);
+}
+
+/* ── Map area ───────────────────────────────────────────────────── */
+.mapArea {
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  /* Needed so the absolute legend stays inside the rounded corner */
+  isolation: isolate;
+}
+
+/* ── Map legend ─────────────────────────────────────────────────── */
+.legend {
+  position: absolute;
+  bottom: var(--s-4);
+  left: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-4);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.legendDot {
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+.legendLine {
+  display: inline-block;
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}

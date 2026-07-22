@@ -1,0 +1,131 @@
+/* ════════════════════════════════════════════════════════════════
+   Design Tokens — Light Mode
+   All raw values live here. Components reference only variables —
+   never hardcoded hex codes — so a theme swap changes one file.
+═══════════════════════════════════════════════════════════════════ */
+:root {
+  /* Backgrounds */
+  --bg-base:       #f1f5f9;
+  --bg-surface:    #ffffff;
+  --bg-card:       #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-overlay:    rgba(241, 245, 249, 0.92);
+
+  /* Borders */
+  --border:        #e2e8f0;
+  --border-subtle: #f1f5f9;
+
+  /* Text */
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #94a3b8;
+
+  /* Brand */
+  --sbb-red:  #eb0000;
+  --accent:   #2563eb;
+
+  /* Semantic status */
+  --status-green:  #059669;
+  --status-orange: #d97706;
+  --status-red:    #dc2626;
+
+  /* Glows — subtle in light mode */
+  --glow-green:  0 0 10px rgba(5, 150, 105, 0.18);
+  --glow-orange: 0 0 10px rgba(217, 119, 6, 0.18);
+  --glow-red:    0 0 10px rgba(220, 38, 38, 0.18);
+  --glow-blue:   0 0 10px rgba(37, 99, 235, 0.18);
+
+  /* Spacing scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Radius */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-pill: 9999px;
+
+  /* Motion */
+  --ease-fast:   150ms ease;
+  --ease-normal: 250ms ease;
+  --ease-slow:   400ms ease;
+
+  /* Shadows (new for light mode — cards need elevation) */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 6px rgba(15, 23, 42, 0.07), 0 2px 4px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 10px 15px rgba(15, 23, 42, 0.08), 0 4px 6px rgba(15, 23, 42, 0.05);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Reset
+═══════════════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, select {
+  font-family: inherit;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Custom scrollbar (light mode)
+═══════════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ════════════════════════════════════════════════════════════════
+   Utility animations
+═══════════════════════════════════════════════════════════════════ */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  from { background-position: -400px 0; }
+  to   { background-position: 400px 0; }
+}
+
+@keyframes train-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
+}

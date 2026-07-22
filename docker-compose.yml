@@ -1,0 +1,64 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: rail-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: railpulse
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - rail-network
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: rail-server
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      MONGODB_URI: mongodb://mongodb:27017/railpulse
+      SBB_API_BASE_URL: https://transport.opendata.ch/v1
+      CLIENT_URL: http://localhost:3000
+    ports:
+      - '3001:3001'
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - rail-network
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:3001/api/health']
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: rail-client
+    restart: unless-stopped
+    ports:
+      - '3000:80'
+    depends_on:
+      server:
+        condition: service_healthy
+    networks:
+      - rail-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  rail-network:
+    driver: bridge
