@@ -12,9 +12,20 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // ── Middleware ────────────────────────────────────────────────────────────
+// In production, also allow any *.vercel.app preview URL so the Vercel
+// frontend can call the Render backend without needing an exact domain match.
+const VERCEL_PATTERN = /^https:\/\/[a-z0-9-]+\.vercel\.app$/;
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: (origin, callback) => {
+      const explicit = process.env.CLIENT_URL || 'http://localhost:3000';
+      const allowed =
+        !origin ||
+        origin === explicit ||
+        (process.env.NODE_ENV === 'production' && VERCEL_PATTERN.test(origin));
+      callback(allowed ? null : new Error('Not allowed by CORS'), allowed);
+    },
     credentials: true,
   })
 );
