@@ -1,7 +1,7 @@
 const { getConnections } = require('../services/sbbApiService');
 
 /**
- * GET /api/trains/connection?from=Zürich HB&to=Bern&limit=4
+ * GET /api/connections?from=Zürich HB&to=Bern&limit=4
  *
  * Returns train connections between two stations with full route data
  * (stop list + coordinates) ready for MapLibre line rendering and
